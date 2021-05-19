@@ -3,7 +3,7 @@ import pygame
 pygame.init()
 
 
-window = pygame.display.set_mode((300, 600))
+window = pygame.display.set_mode((600, 300))
 pygame.display.set_caption('Subway surfers 2.0')
 
 
