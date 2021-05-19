@@ -1,10 +1,15 @@
+# === JOGO SUBWAY SURFERS 2.0 ===
+# ---- Importando bibliotecas necessárias
 import pygame
 
 pygame.init()
 
-
+# ---- Definindo a tela
 window = pygame.display.set_mode((600, 300))
 pygame.display.set_caption('Subway surfers 2.0')
+
+# ---- ASSETS
+BG = pygame.image.load('lm_jogo.jpeg').convert()
 
 
 game = True
