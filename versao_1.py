@@ -5,26 +5,22 @@ import pygame
 pygame.init()
 
 # ---- Definindo a tela
-ALT_TELA = 300
-LARG_TELA = 600 
+ALT_TELA = 500
+LARG_TELA = 1000
 window = pygame.display.set_mode((LARG_TELA, ALT_TELA))
 pygame.display.set_caption('Subway surfers 2.0')
 
 # ---- ASSETS
-BG = pygame.image.load('background.jpeg').convert()
-BG = pygame.transform.scale9 (BG, (LARG_TELA, ALT_TELA))
+BG = pygame.image.load('assets/background.jpeg').convert()
+BG = pygame.transform.scale(BG, (LARG_TELA, ALT_TELA))
 
 game = True
 
 while game:
     for event in pygame.event.get():
-        if event.type == pygame.KEYUP:
+        if event.type == pygame.QUIT:
             game = False
 
-    window.fill((255, 255, 255))
-
-
-    pygame.display.update()
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(BG, (0, 0))
