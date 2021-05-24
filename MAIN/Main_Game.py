@@ -5,6 +5,7 @@ pygame.init()
 
 
 win = pygame.display.set_mode((1000, 500))
+
 bg_img = pygame.image.load("Assets/Image/City5.jpg")
 bg_img2 = pygame.image.load("Assets/Image/City3.jpg")
 bg_img3 = pygame.image.load("Assets/Image/City4.jpg")
@@ -14,6 +15,7 @@ bg_img6 = pygame.image.load("Assets/Image/City8.jpg")
 bg_img7 = pygame.image.load("Assets/Image/City9.jpg")
 bg_img8 = pygame.image.load("Assets/Image/City.gif")
 bg_img9 = pygame.image.load("Assets/Image/City2_1.jpg")
+
 BG = pygame.transform.scale(bg_img, (1000, 500))
 BG2 = pygame.transform.scale(bg_img2, (1000, 500))
 BG3 = pygame.transform.scale(bg_img3, (1000, 500))
@@ -27,7 +29,9 @@ BG9 = pygame.transform.scale(bg_img9, (1000, 500))
 
 CORRER = [pygame.image.load(os.path.join("Assets/Player", "p1_walk01.png")),
            pygame.image.load(os.path.join("Assets/Player", "p1_walk03.png"))]
+
 PULAR = pygame.image.load(os.path.join("Assets/Player", "p1_jump.png"))
+
 AGAIXAR = [pygame.image.load(os.path.join("Assets/Player", "p1_down7.png")), 
            pygame.image.load(os.path.join("Assets/Player", "p1_down8.png"))]
 
@@ -35,7 +39,7 @@ AGAIXAR = [pygame.image.load(os.path.join("Assets/Player", "p1_down7.png")),
 class Alien:
     X_POS = 80
     Y_POS = 400
-    Y_POS_AG = 420
+    Y_POS_AG = 427
     vel_pulo = 8.5
 
     def __init__(self):
@@ -249,7 +253,7 @@ def main():
         clock.tick(30)
         pygame.display.update()
 
-def menu(death_count):
+def menu(perdeu):
 
     global points
 
@@ -262,11 +266,11 @@ def menu(death_count):
         win.blit(BG, (image_width, image_height))
         font = pygame.font.SysFont(None, 30)
 
-        if death_count == 0:
+        if perdeu == 0:
             text = font.render("Aperte as setas para começar", True, (0, 0, 0))
             text2 = font.render("Somente as setas serão usadas durante o jogo", True, (0, 0, 0))
 
-        elif death_count > 0:
+        elif perdeu > 0:
             text = font.render("Aperte as setas para começar", True, (0, 0, 0))
             text2 = font.render("Somente as setas serão usadas durante o jogo", True, (0, 0, 0))
             score = font.render("Sua Pontuação: " + str(points), True, (0, 0, 0))
@@ -293,5 +297,4 @@ def menu(death_count):
             if event.type == pygame.KEYDOWN:
                 main()
 
-
-menu(death_count=0)
+menu(perdeu=0)
