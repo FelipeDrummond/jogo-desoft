@@ -2,7 +2,7 @@
 # ---- Importando bibliotecas necessárias
 import pygame
 import os
-from assets import bg, bg2
+
 pygame.init()
 
 # ---- Definindo a tela
