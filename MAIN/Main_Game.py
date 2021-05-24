@@ -298,8 +298,6 @@ def menu(perdeu):
         # Faz o background do menu
 
         win.fill((255, 255, 255))
-        image_width = MN.get_width()
-        image_height = MN.get_height()
         win.blit(MN, (0, 0))
 
         font = pygame.font.SysFont(None, 35)
@@ -335,7 +333,7 @@ def menu(perdeu):
         win.blit(DISP, (440, 200))
 
         pygame.display.update()
-
+        
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
