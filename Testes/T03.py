@@ -16,6 +16,7 @@ bg_img7 = pygame.image.load("Assets/Image/City9.jpg")
 bg_img8 = pygame.image.load("Assets/Image/City.gif")
 bg_img9 = pygame.image.load("Assets/Image/City2_1.jpg")
 plat_img = pygame.image.load("Assets/Other/plataforma2.png").convert_alpha()
+rocket_img = pygame.image.load("Assets/Other/rocket.png").convert_alpha()
 
 BG = pygame.transform.scale(bg_img, (1000, 500))
 BG2 = pygame.transform.scale(bg_img2, (1000, 500))
@@ -27,6 +28,7 @@ BG7 = pygame.transform.scale(bg_img7, (1000, 500))
 BG8 = pygame.transform.scale(bg_img8, (1000, 500))
 BG9 = pygame.transform.scale(bg_img9, (1000, 500))
 PLAT = pygame.transform.scale(plat_img, (200, 80))
+ROCK = pygame.transform.scale(rocket_img, (100, 40))
 
 CORRER = [pygame.image.load(os.path.join("Assets/Player", "p1_walk01.png")),
            pygame.image.load(os.path.join("Assets/Player", "p1_walk03.png"))]
@@ -34,15 +36,34 @@ PULAR = pygame.image.load(os.path.join("Assets/Player", "p1_jump.png"))
 AGAIXAR = [pygame.image.load(os.path.join("Assets/Player", "p1_down7.png")), 
            pygame.image.load(os.path.join("Assets/Player", "p1_down8.png"))]
 
+class Rocket:
+    def __init__(self, img, vel):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = img
+        self.rect = self.image.get_rect()
+        self.rect.x = 1000
+        self.rect.y = random.randint(25, 250)
+        self.speedx = vel
+
+    def update(self):
+        self.rect.x -= self.speedx
+        if self.rect.right < 0:
+            self.rect.x = 1000
+            self.rect.y = random.randint(25, 250)
+
+    def muda(self, win):
+        win.blit(self.image, (self.rect.x, self.rect.y))
+
 class Platform:
-    def __init__(self, img):
+    def __init__(self, img, vel):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = img
         self.rect = self.image.get_rect()
         self.rect.x = 1000
         self.rect.y = random.randint(25, 350)
-        self.speedx = 20
+        self.speedx = vel
 
     def update(self):
         self.rect.x -= self.speedx
@@ -144,8 +165,9 @@ def main():
     font = pygame.font.SysFont(None, 30)
     obstacles = []
     death_count = 0
-    plat1 = Platform(PLAT)
+    plat1 = Platform(PLAT, velocidade)
     player = Alien()
+    ship = Rocket(ROCK, velocidade)
 
     def pontos():
         global points, velocidade
@@ -266,9 +288,13 @@ def main():
 
         plat1.muda(win)
 
+        ship.muda(win)
+
         player.att(userInput)
 
         plat1.update()
+
+        ship.update()
 
         pontos()
 
