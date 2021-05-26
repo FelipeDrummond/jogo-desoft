@@ -32,9 +32,9 @@ BG7 = pygame.transform.scale(bg_img7, (1000, 500))
 BG8 = pygame.transform.scale(bg_img8, (1000, 500))
 BG9 = pygame.transform.scale(bg_img9, (1000, 500))
 MN = pygame.transform.scale(mn, (1000, 500))
-OBS1 = pygame.transform.scale(obs_img1, (1000, 500))
-OBS2 = pygame.transform.scale(obs_img2, (1000, 500))
-OBS3 = pygame.transform.scale(obs_img3, (1000, 500))
+OBS1 = pygame.transform.scale(obs_img1, (100, 100))
+OBS2 = pygame.transform.scale(obs_img2, (100, 100))
+OBS3 = pygame.transform.scale(obs_img3, (100, 100))
 
 CORRER = [pygame.image.load(os.path.join("Assets/Player", "p1_walk01.png")),
            pygame.image.load(os.path.join("Assets/Player", "p1_walk03.png"))]
@@ -156,14 +156,14 @@ class Barreira(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
-        self.rect.y = 325
+        self.rect.y = 400
 
 
-class Hidrante(Obstaculo):
+class Cone(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
-        self.rect.y = 300
+        self.rect.y = 400
 
 
 class Naves(Obstaculo):
@@ -339,11 +339,11 @@ def main():
         background()
 
         if len(obstacles) == 0:
-            #if random.randint(0, 2) == 0:
-                #obstacles.append(Naves(NAVEZINHA))
-            #elif random.randint(0, 2) == 1:
-                #obstacles.append(LargeCactus(LARGE_CACTUS))
-            if random.randint(0, 2) == 2:
+            if random.randint(0, 2) == 0:
+                obstacles.append(Cone(OBS2))
+            elif random.randint(0, 2) == 1:
+                obstacles.append(Barreira(OBS1))
+            elif random.randint(0, 2) == 2:
                 obstacles.append(Naves(ROCK))
 
         for obstacle in obstacles:
