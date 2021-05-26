@@ -18,6 +18,9 @@ bg_img9 = pygame.image.load("Assets/Image/City2_1.jpg")
 mn = pygame.image.load("Assets/Image/Nave.jpg")
 nvz = pygame.image.load("Assets/Image/Navezinha.png")
 rocket_img = pygame.image.load("Assets/Other/rocket.png").convert_alpha()
+obs_img1 = pygame.image.load('Assets/other/barreira1.png') 
+obs_img2 = pygame.image.load('Assets/other/barreira2.png') 
+obs_img3 = pygame.image.load('Assets/other/parede.png')
 
 BG = pygame.transform.scale(bg_img, (1000, 500))
 BG2 = pygame.transform.scale(bg_img2, (1000, 500))
@@ -29,7 +32,9 @@ BG7 = pygame.transform.scale(bg_img7, (1000, 500))
 BG8 = pygame.transform.scale(bg_img8, (1000, 500))
 BG9 = pygame.transform.scale(bg_img9, (1000, 500))
 MN = pygame.transform.scale(mn, (1000, 500))
-
+OBS1 = pygame.transform.scale(obs_img1, (1000, 500))
+OBS2 = pygame.transform.scale(obs_img2, (1000, 500))
+OBS3 = pygame.transform.scale(obs_img3, (1000, 500))
 
 CORRER = [pygame.image.load(os.path.join("Assets/Player", "p1_walk01.png")),
            pygame.image.load(os.path.join("Assets/Player", "p1_walk03.png"))]
