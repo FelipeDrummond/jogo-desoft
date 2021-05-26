@@ -417,6 +417,7 @@ def menu(perdeu):
 
             if event.type == pygame.QUIT:
                 run = False
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 main()
 
