@@ -144,7 +144,7 @@ class Obstaculo:
             obstacles.pop()
 
     def draw(self, win):
-        win.blit(self.image[self.type], self.rect)
+        win.blit(self.image, self.rect)
 
 
 class Barreira(Obstaculo):
@@ -171,7 +171,7 @@ class Naves(Obstaculo):
     def draw(self, win):
         if self.index >= 9:
             self.index = 0
-        win.blit(self.image[self.index//5], self.rect)
+        win.blit(self.image, self.rect)
         self.index += 1
 
 
