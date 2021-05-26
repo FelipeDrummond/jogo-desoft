@@ -21,6 +21,7 @@ rocket_img = pygame.image.load("Assets/Other/rocket.png").convert_alpha()
 obs_img1 = pygame.image.load('Assets/other/barreira1.png') 
 obs_img2 = pygame.image.load('Assets/other/barreira2.png') 
 obs_img3 = pygame.image.load('Assets/other/parede.png')
+gameover = pygame.image.load('Assets/Image/GameOver.jpg')
 
 BG = pygame.transform.scale(bg_img, (1000, 500))
 BG2 = pygame.transform.scale(bg_img2, (1000, 500))
@@ -35,6 +36,7 @@ MN = pygame.transform.scale(mn, (1000, 500))
 OBS1 = pygame.transform.scale(obs_img1, (100, 100))
 OBS2 = pygame.transform.scale(obs_img2, (100, 100))
 OBS3 = pygame.transform.scale(obs_img3, (100, 100))
+GO = pygame.transform.scale(bg_img, (1000, 500))
 
 CORRER = [pygame.image.load(os.path.join("Assets/Player", "p1_walk01.png")),
            pygame.image.load(os.path.join("Assets/Player", "p1_walk03.png"))]
@@ -350,7 +352,8 @@ def main():
             obstacle.draw(win)
             obstacle.update()
             if player.alien_rect.colliderect(obstacle.rect):
-                pygame.time.delay(2000)
+                win.blit(GO, (0, 0))
+                pygame.time.delay(1000)
                 perdeu += 1
                 menu(perdeu)
 
@@ -361,7 +364,7 @@ def main():
         pontos()
 
         clock.tick(30)
-
+        
         pygame.display.update()
 
 
@@ -389,12 +392,13 @@ def menu(perdeu):
             text3 = font.render("Não encoste em nenhum obstáculo!!!", True, (255, 0, 80))
 
         elif perdeu > 0:
+            
             text = font.render("Aperte as setas para começar", True, (0, 255, 0))
             text2 = font.render("Somente as setas serão usadas durante o jogo", True, (255, 233, 0))
             text3 = font.render("Não encoste em nenhum obstáculo!!!", True, (255, 0, 80))
             score = font.render("Sua Pontuação: " + str(points), True, (0, 0, 0))
             scoreRect = score.get_rect()
-            scoreRect.center = (680, 370)
+            scoreRect.center = (490, 370)
             win.blit(score, scoreRect)
 
         textRect = text.get_rect()
