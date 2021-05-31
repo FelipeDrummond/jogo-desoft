@@ -24,6 +24,8 @@ obs_img2 = pygame.image.load('Assets/Other/barreira2.png')
 obs_img3 = pygame.image.load('Assets/Other/parede.png')
 gameover = pygame.image.load('Assets/Image/GameOver.jpg')
 tiles = pygame.image.load('Assets\Image\FullTiles.png')
+stop = pygame.image.load('Assets\Other\Stop.png').convert_alpha()
+
 
 BG = pygame.transform.scale(bg_img, (1000, 500))
 BG2 = pygame.transform.scale(bg_img2, (1000, 500))
@@ -35,7 +37,7 @@ BG7 = pygame.transform.scale(bg_img7, (1000, 500))
 BG8 = pygame.transform.scale(bg_img8, (1000, 500))
 BG9 = pygame.transform.scale(bg_img9, (1000, 500))
 MN = pygame.transform.scale(mn, (1000, 500))
-OBS1 = pygame.transform.scale(obs_img1, (100, 100))
+OBS1 = pygame.transform.scale(stop, (70, 110))
 OBS2 = pygame.transform.scale(obs_img2, (100, 100))
 OBS3 = pygame.transform.scale(obs_img3, (100, 100))
 GO = pygame.transform.scale(bg_img, (1000, 500))
@@ -165,7 +167,7 @@ class Barreira(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
-        self.rect.y = 390
+        self.rect.y = 370
 
 
 class Cone(Obstaculo):
@@ -277,6 +279,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 3000 and points > 2000:
 
@@ -293,6 +296,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 4000 and points > 3000:
 
@@ -309,6 +313,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 5000 and points > 4000:
 
@@ -325,6 +330,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 6000 and points > 5000:
 
@@ -341,6 +347,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 7000 and points > 6000:
 
@@ -357,6 +364,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 8000 and points > 7000:
 
@@ -373,6 +381,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points > 8000:
 
@@ -390,6 +399,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
     # Update do que irá aparecer na tela
     while run:
