@@ -1,8 +1,9 @@
 import pygame
 import os
 import random
-pygame.init()
 
+pygame.init()
+pygame.mixer.init()
 
 win = pygame.display.set_mode((1000, 500))
 
@@ -18,9 +19,9 @@ bg_img9 = pygame.image.load("Assets/Image/City2_1.jpg")
 mn = pygame.image.load("Assets/Image/Nave.jpg")
 nvz = pygame.image.load("Assets/Image/Navezinha.png")
 rocket_img = pygame.image.load("Assets/Other/rocket.png").convert_alpha()
-obs_img1 = pygame.image.load('Assets/other/barreira1.png') 
-obs_img2 = pygame.image.load('Assets/other/barreira2.png') 
-obs_img3 = pygame.image.load('Assets/other/parede.png')
+obs_img1 = pygame.image.load('Assets/Other/barreira1.jpg') 
+obs_img2 = pygame.image.load('Assets/Other/barreira2.png') 
+obs_img3 = pygame.image.load('Assets/Other/parede.png')
 gameover = pygame.image.load('Assets/Image/GameOver.jpg')
 
 BG = pygame.transform.scale(bg_img, (1000, 500))
@@ -54,6 +55,9 @@ NAVEZINHA = [pygame.image.load(os.path.join("Assets/Image", "Navezinha.png")),
             pygame.image.load(os.path.join("Assets/Image", "Navezinha.png"))]
 HIDRA = pygame.image.load(os.path.join("Assets/Image", "Hidrante.jpg"))
 PLACA = pygame.image.load(os.path.join("Assets/Image", "Hidrante.jpg"))
+
+pygame.mixer.music.load("Assets/snd/DARUDE.mp3")
+pygame.mixer.music.set_volume(0.4)    
 
 class Alien:
     X_POS = 80
@@ -506,6 +510,7 @@ def menu(perdeu):
                 run = False
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
+                pygame.mixer.music.play(loops=-1)
                 main()
 
 menu(perdeu=0)
