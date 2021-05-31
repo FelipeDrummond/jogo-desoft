@@ -20,7 +20,7 @@ mn = pygame.image.load("Assets/Image/Nave.jpg")
 nvz = pygame.image.load("Assets/Image/Navezinha.png")
 rocket_img = pygame.image.load("Assets/Other/rocket.png").convert_alpha()
 obs_img1 = pygame.image.load('Assets/Other/barreira1.jpg') 
-obs_img2 = pygame.image.load('Assets/Other/barreira2.png') 
+obs_img2 = pygame.image.load('Assets/Other/barreira2.png')
 obs_img3 = pygame.image.load('Assets/Other/parede.png')
 gameover = pygame.image.load('Assets/Image/GameOver.jpg')
 tiles = pygame.image.load('Assets\Image\FullTiles.png')
@@ -38,7 +38,7 @@ BG8 = pygame.transform.scale(bg_img8, (1000, 500))
 BG9 = pygame.transform.scale(bg_img9, (1000, 500))
 MN = pygame.transform.scale(mn, (1000, 500))
 OBS1 = pygame.transform.scale(stop, (70, 110))
-OBS2 = pygame.transform.scale(obs_img2, (100, 100))
+OBS2 = pygame.transform.scale(obs_img2, (150, 150))
 OBS3 = pygame.transform.scale(obs_img3, (100, 100))
 GO = pygame.transform.scale(bg_img, (1000, 500))
 TL = pygame.transform.scale(tiles, (1000, 100))
@@ -54,7 +54,7 @@ AGAIXAR = [pygame.image.load(os.path.join("Assets/Player", "p1_down7.png")),
 
 DISP = pygame.image.load(os.path.join("Assets/Player", "p1_walk012.png"))
 
-ROCK = pygame.transform.scale(rocket_img, (100, 40))
+ROCK = pygame.transform.scale(rocket_img, (140, 70))
 
 NAVEZINHA = [pygame.image.load(os.path.join("Assets/Image", "Navezinha.png")), 
             pygame.image.load(os.path.join("Assets/Image", "Navezinha.png"))]
@@ -174,7 +174,7 @@ class Cone(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
-        self.rect.y = 390
+        self.rect.y = 360
 
 
 class Naves(Obstaculo):
