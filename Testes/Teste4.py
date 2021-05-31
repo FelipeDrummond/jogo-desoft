@@ -4,7 +4,7 @@ import random
 pygame.init()
 
 
-win = pygame.display.set_mode((1000, 500))
+win = pygame.display.set_mode((950, 500))
 
 bg_img = pygame.image.load("Assets/Image/City5.jpg")
 bg_img2 = pygame.image.load("Assets/Image/City3.jpg")
@@ -22,6 +22,7 @@ obs_img1 = pygame.image.load('Assets/other/barreira1.png')
 obs_img2 = pygame.image.load('Assets/other/barreira2.png') 
 obs_img3 = pygame.image.load('Assets/other/parede.png')
 gameover = pygame.image.load('Assets/Image/GameOver.jpg')
+tiles = pygame.image.load('Assets\Image\FullTiles.png')
 
 BG = pygame.transform.scale(bg_img, (1000, 500))
 BG2 = pygame.transform.scale(bg_img2, (1000, 500))
@@ -37,6 +38,8 @@ OBS1 = pygame.transform.scale(obs_img1, (100, 100))
 OBS2 = pygame.transform.scale(obs_img2, (100, 100))
 OBS3 = pygame.transform.scale(obs_img3, (100, 100))
 GO = pygame.transform.scale(bg_img, (1000, 500))
+TL = pygame.transform.scale(tiles, (1000, 100))
+
 
 CORRER = [pygame.image.load(os.path.join("Assets/Player", "p1_walk01.png")),
            pygame.image.load(os.path.join("Assets/Player", "p1_walk03.png"))]
@@ -57,8 +60,8 @@ PLACA = pygame.image.load(os.path.join("Assets/Image", "Hidrante.jpg"))
 
 class Alien:
     X_POS = 80
-    Y_POS = 400
-    Y_POS_AG = 427
+    Y_POS = 375
+    Y_POS_AG = 397
     vel_pulo = 8.5
 
     def __init__(self):
@@ -158,14 +161,14 @@ class Barreira(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
-        self.rect.y = 400
+        self.rect.y = 390
 
 
 class Cone(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
-        self.rect.y = 400
+        self.rect.y = 390
 
 
 class Naves(Obstaculo):
@@ -197,12 +200,13 @@ class Zero(Obstaculo):
 
 # Função principal do jojo
 def main():
-    global velocidade, x_pos_bg, y_pos_bg, points, obstacles
+    global velocidade, x_pos_bg, y_pos_bg, points, obstacles, x_tiles
     run = True
     clock = pygame.time.Clock()
     player = Alien()    
     velocidade = 20
     x_pos_bg = 0
+    x_tiles = 0
     y_pos_bg = 0
     points = 0
     font = pygame.font.SysFont(None, 30)
@@ -226,115 +230,160 @@ def main():
     # Função para o background
     def background():
 
-        global x_pos_bg, y_pos_bg
+        global x_pos_bg, y_pos_bg, x_tiles
+
+        ytl = 460
+        image_width = BG.get_width()
+        image_width_t = TL.get_width()
+
+
+
 
         # Faz com que o background mude conforme a pontuação aumenta
         if points <= 1000:
 
-            image_width = BG.get_width()
             win.blit(BG, (x_pos_bg, y_pos_bg))
             win.blit(BG, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
             if x_pos_bg <= -image_width:
                 win.blit(BG, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 2000 and points > 1000:
 
-            image_width2 = BG2.get_width()
             win.blit(BG2, (x_pos_bg, y_pos_bg))
-            win.blit(BG2, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG2, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG2, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG2, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 3000 and points > 2000:
 
-            image_width2 = BG3.get_width()
             win.blit(BG3, (x_pos_bg, y_pos_bg))
-            win.blit(BG3, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG3, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG3, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG3, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 4000 and points > 3000:
 
-            image_width2 = BG4.get_width()
-
             win.blit(BG4, (x_pos_bg, y_pos_bg))
-            win.blit(BG4, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG4, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG4, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG4, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 5000 and points > 4000:
 
-            image_width2 = BG5.get_width()
             win.blit(BG5, (x_pos_bg, y_pos_bg))
-            win.blit(BG5, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG5, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG5, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG5, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 6000 and points > 5000:
 
-            image_width2 = BG6.get_width()
             win.blit(BG6, (x_pos_bg, y_pos_bg))
-            win.blit(BG6, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG6, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG6, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG6, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 7000 and points > 6000:
 
-            image_width2 = BG7.get_width()
             win.blit(BG7, (x_pos_bg, y_pos_bg))
-            win.blit(BG7, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG7, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
             
-            if x_pos_bg <= -image_width2:
-                win.blit(BG7, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG7, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 8000 and points > 7000:
 
-            image_width2 = BG8.get_width()
             win.blit(BG8, (x_pos_bg, y_pos_bg))
-            win.blit(BG8, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG8, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG8, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG8, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
-                
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
+
             x_pos_bg -= velocidade
 
         elif points > 8000:
 
-            image_width2 = BG9.get_width()
             win.blit(BG9, (x_pos_bg, y_pos_bg))
-            win.blit(BG9, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG9, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG9, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG9, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 

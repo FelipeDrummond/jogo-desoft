@@ -4,7 +4,7 @@ import random
 pygame.init()
 
 
-win = pygame.display.set_mode((1000, 500))
+win = pygame.display.set_mode((950, 500))
 
 bg_img = pygame.image.load("Assets/Image/City5.jpg")
 bg_img2 = pygame.image.load("Assets/Image/City3.jpg")
@@ -16,6 +16,13 @@ bg_img7 = pygame.image.load("Assets/Image/City9.jpg")
 bg_img8 = pygame.image.load("Assets/Image/City.gif")
 bg_img9 = pygame.image.load("Assets/Image/City2_1.jpg")
 mn = pygame.image.load("Assets/Image/Nave.jpg")
+nvz = pygame.image.load("Assets/Image/Navezinha.png")
+rocket_img = pygame.image.load("Assets/Other/rocket.png").convert_alpha()
+obs_img1 = pygame.image.load('Assets/other/barreira1.png') 
+obs_img2 = pygame.image.load('Assets/other/barreira2.png') 
+obs_img3 = pygame.image.load('Assets/other/parede.png')
+gameover = pygame.image.load('Assets/Image/GameOver.jpg')
+tiles = pygame.image.load('Assets\Image\FullTiles.png')
 
 BG = pygame.transform.scale(bg_img, (1000, 500))
 BG2 = pygame.transform.scale(bg_img2, (1000, 500))
@@ -27,6 +34,11 @@ BG7 = pygame.transform.scale(bg_img7, (1000, 500))
 BG8 = pygame.transform.scale(bg_img8, (1000, 500))
 BG9 = pygame.transform.scale(bg_img9, (1000, 500))
 MN = pygame.transform.scale(mn, (1000, 500))
+OBS1 = pygame.transform.scale(obs_img1, (100, 100))
+OBS2 = pygame.transform.scale(obs_img2, (100, 100))
+OBS3 = pygame.transform.scale(obs_img3, (100, 100))
+GO = pygame.transform.scale(bg_img, (1000, 500))
+TL = pygame.transform.scale(tiles, (1000, 100))
 
 
 CORRER = [pygame.image.load(os.path.join("Assets/Player", "p1_walk01.png")),
@@ -39,10 +51,17 @@ AGAIXAR = [pygame.image.load(os.path.join("Assets/Player", "p1_down7.png")),
 
 DISP = pygame.image.load(os.path.join("Assets/Player", "p1_walk012.png"))
 
+ROCK = pygame.transform.scale(rocket_img, (100, 40))
+
+NAVEZINHA = [pygame.image.load(os.path.join("Assets/Image", "Navezinha.png")), 
+            pygame.image.load(os.path.join("Assets/Image", "Navezinha.png"))]
+HIDRA = pygame.image.load(os.path.join("Assets/Image", "Hidrante.jpg"))
+PLACA = pygame.image.load(os.path.join("Assets/Image", "Hidrante.jpg"))
+
 class Alien:
     X_POS = 80
-    Y_POS = 400
-    Y_POS_AG = 427
+    Y_POS = 375
+    Y_POS_AG = 397
     vel_pulo = 8.5
 
     def __init__(self):
@@ -120,19 +139,80 @@ class Alien:
     def muda(self, win):
         win.blit(self.image, (self.alien_rect.x, self.alien_rect.y))
 
+
+class Obstaculo:
+
+    def __init__(self, image, type):
+        self.image = image
+        self.type = type
+        self.rect = self.image.get_rect()
+        self.rect.x = 1000
+
+    def update(self):
+        self.rect.x -= velocidade
+        if self.rect.x < -self.rect.width:
+            obstacles.pop()
+
+    def draw(self, win):
+        win.blit(self.image, self.rect)
+
+
+class Barreira(Obstaculo):
+    def __init__(self, image):
+        self.type = random.randint(0, 2)
+        super().__init__(image, self.type)
+        self.rect.y = 390
+
+
+class Cone(Obstaculo):
+    def __init__(self, image):
+        self.type = random.randint(0, 2)
+        super().__init__(image, self.type)
+        self.rect.y = 390
+
+
+class Naves(Obstaculo):
+    def __init__(self, image):
+        self.type = 0
+        super().__init__(image, self.type)
+        self.rect.y = random.randint(250, 450)
+        self.index = 0
+
+    def draw(self, win):
+        if self.index >= 9:
+            self.index = 0
+        win.blit(self.image, self.rect)
+        self.index += 1
+
+class Zero(Obstaculo):
+    def __init__(self, image):
+        self.type = 0
+        super().__init__(image, self.type)
+        self.rect.y = 1100
+        self.index = 0
+
+    def draw(self, win):
+        if self.index >= 9:
+            self.index = 0
+        win.blit(self.image, self.rect)
+        self.index += 1
+
+
 # Função principal do jojo
 def main():
-    global velocidade, x_pos_bg, y_pos_bg, points, obstacles
+    global velocidade, x_pos_bg, y_pos_bg, points, obstacles, x_tiles
     run = True
-    clock = pygame.time.Clock()    
+    clock = pygame.time.Clock()
+    player = Alien()    
     velocidade = 20
     x_pos_bg = 0
+    x_tiles = 0
     y_pos_bg = 0
     points = 0
     font = pygame.font.SysFont(None, 30)
     obstacles = []
-    death_count = 0
-    player = Alien()
+    perdeu = 0
+    
 
     # Função para a pontuação
     def pontos():
@@ -150,115 +230,160 @@ def main():
     # Função para o background
     def background():
 
-        global x_pos_bg, y_pos_bg
+        global x_pos_bg, y_pos_bg, x_tiles
+
+        ytl = 460
+        image_width = BG.get_width()
+        image_width_t = TL.get_width()
+
+
+
 
         # Faz com que o background mude conforme a pontuação aumenta
         if points <= 1000:
 
-            image_width = BG.get_width()
             win.blit(BG, (x_pos_bg, y_pos_bg))
             win.blit(BG, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
             if x_pos_bg <= -image_width:
                 win.blit(BG, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 2000 and points > 1000:
 
-            image_width2 = BG2.get_width()
             win.blit(BG2, (x_pos_bg, y_pos_bg))
-            win.blit(BG2, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG2, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG2, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG2, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 3000 and points > 2000:
 
-            image_width2 = BG3.get_width()
             win.blit(BG3, (x_pos_bg, y_pos_bg))
-            win.blit(BG3, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG3, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG3, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG3, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 4000 and points > 3000:
 
-            image_width2 = BG4.get_width()
-
             win.blit(BG4, (x_pos_bg, y_pos_bg))
-            win.blit(BG4, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG4, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG4, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG4, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 5000 and points > 4000:
 
-            image_width2 = BG5.get_width()
             win.blit(BG5, (x_pos_bg, y_pos_bg))
-            win.blit(BG5, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG5, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG5, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG5, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 6000 and points > 5000:
 
-            image_width2 = BG6.get_width()
             win.blit(BG6, (x_pos_bg, y_pos_bg))
-            win.blit(BG6, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG6, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG6, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG6, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 7000 and points > 6000:
 
-            image_width2 = BG7.get_width()
             win.blit(BG7, (x_pos_bg, y_pos_bg))
-            win.blit(BG7, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG7, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
             
-            if x_pos_bg <= -image_width2:
-                win.blit(BG7, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG7, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
         elif points <= 8000 and points > 7000:
 
-            image_width2 = BG8.get_width()
             win.blit(BG8, (x_pos_bg, y_pos_bg))
-            win.blit(BG8, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG8, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG8, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG8, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
-                
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
+
             x_pos_bg -= velocidade
 
         elif points > 8000:
 
-            image_width2 = BG9.get_width()
             win.blit(BG9, (x_pos_bg, y_pos_bg))
-            win.blit(BG9, (image_width2 + x_pos_bg, y_pos_bg))
+            win.blit(BG9, (image_width + x_pos_bg, y_pos_bg))
+            win.blit(TL, (x_tiles, ytl))
+            win.blit(TL, (image_width_t + x_tiles, ytl))
 
-            if x_pos_bg <= -image_width2:
-                win.blit(BG9, (image_width2 + x_pos_bg, y_pos_bg))
+            if x_pos_bg <= -image_width:
+                win.blit(BG9, (image_width + x_pos_bg, y_pos_bg))
                 x_pos_bg = 0
+
+            if x_tiles <= -image_width_t:
+                win.blit(TL, (image_width_t + x_tiles, ytl))
+                x_tiles = 0
 
             x_pos_bg -= velocidade
 
@@ -272,8 +397,97 @@ def main():
         win.fill((255, 255, 255))
 
         userInput = pygame.key.get_pressed()
+        
+
 
         background()
+
+        if len(obstacles) == 0:
+            if points < 1000:
+                z = random.randint(0, 3)
+                if z == 0:
+                    obstacles.append(Cone(OBS2))
+                elif z == 1:
+                    obstacles.append(Barreira(OBS1))
+                elif z == 2 or z == 3:
+                    obstacles.append(Zero(ROCK))
+
+            elif points >= 1000 and points < 2000:
+                z2 = random.randint(0, 3)
+                if z2 == 3:
+                    obstacles.append(Naves(ROCK))
+                elif z2 == 0:
+                    obstacles.append(Cone(OBS2))
+                elif z2 == 1:
+                    obstacles.append(Barreira(OBS1))
+                elif z2 == 2:
+                    obstacles.append(Zero(ROCK))
+
+            elif points >= 2000 and points < 3000:
+                z3 = random.randint(0, 5)
+                if z3 == 3:
+                    obstacles.append(Naves(ROCK))
+                elif z3 == 0:
+                    obstacles.append(Cone(OBS2))
+                elif z3 == 1:
+                    obstacles.append(Barreira(OBS1))
+                elif z3 == 5 or 2:
+                    obstacles.append(Zero(ROCK))
+
+            elif points >= 3000 and points < 4000:
+                z4 = random.randint(0, 6)
+                if z4 == 3:
+                    obstacles.append(Naves(ROCK))
+                elif z4 == 0 or 2:
+                    obstacles.append(Cone(OBS2))
+                elif z4 == 1:
+                    obstacles.append(Barreira(OBS1))
+                elif z4 == 5 or 6:
+                    obstacles.append(Zero(ROCK))
+
+
+            elif points >= 4000 and points < 5000:
+                z5 = random.randint(0, 7)
+                if z5 == 3:
+                    obstacles.append(Naves(ROCK))
+                elif z5 == 0 or 2:
+                    obstacles.append(Cone(OBS2))
+                elif z5 == 1 or 7:
+                    obstacles.append(Barreira(OBS1))
+                elif z5 == 5 or 6:
+                    obstacles.append(Zero(ROCK))
+
+            elif points >= 5000 and points < 6000:
+                z6 = random.randint(0, 8)
+                if z6 == 3:
+                    obstacles.append(Naves(ROCK))
+                elif z6 == 0 or 2:
+                    obstacles.append(Cone(OBS2))
+                elif z6 == 1 or 7:
+                    obstacles.append(Barreira(OBS1))
+                elif z6 == 5 or 6 or z6 == 8:
+                    obstacles.append(Zero(ROCK))
+
+            elif points >= 7000:
+                z7 = random.randint(0, 9)
+                if z7 == 3 or z7 == 7:
+                    obstacles.append(Naves(ROCK))
+                elif z7 == 0:
+                    obstacles.append(Cone(OBS2))
+                elif z7 == 1:
+                    obstacles.append(Barreira(OBS1))
+                elif z7 == 5 or z7 == 6:
+                    obstacles.append(Zero(ROCK))
+
+
+        for obstacle in obstacles:
+            obstacle.draw(win)
+            obstacle.update()
+            if player.alien_rect.colliderect(obstacle.rect):
+                win.blit(GO, (0, 0))
+                pygame.time.delay(1000)
+                perdeu += 1
+                menu(perdeu)
 
         player.muda(win)
 
@@ -282,7 +496,7 @@ def main():
         pontos()
 
         clock.tick(30)
-
+        
         pygame.display.update()
 
 
@@ -310,12 +524,13 @@ def menu(perdeu):
             text3 = font.render("Não encoste em nenhum obstáculo!!!", True, (255, 0, 80))
 
         elif perdeu > 0:
-            text = font.render("Aperte as setas para começar", True, (0, 255, 0))
+            
+            text = font2.render("Aperte as setas para começar", True, (0, 255, 0))
             text2 = font.render("Somente as setas serão usadas durante o jogo", True, (255, 233, 0))
             text3 = font.render("Não encoste em nenhum obstáculo!!!", True, (255, 0, 80))
             score = font.render("Sua Pontuação: " + str(points), True, (0, 0, 0))
             scoreRect = score.get_rect()
-            scoreRect.center = (680, 370)
+            scoreRect.center = (490, 370)
             win.blit(score, scoreRect)
 
         textRect = text.get_rect()
@@ -338,6 +553,7 @@ def menu(perdeu):
 
             if event.type == pygame.QUIT:
                 run = False
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 main()
 
