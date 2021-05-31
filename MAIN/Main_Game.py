@@ -1,8 +1,9 @@
 import pygame
 import os
 import random
-pygame.init()
 
+pygame.init()
+pygame.mixer.init()
 
 win = pygame.display.set_mode((950, 500))
 
@@ -18,11 +19,13 @@ bg_img9 = pygame.image.load("Assets/Image/City2_1.jpg")
 mn = pygame.image.load("Assets/Image/Nave.jpg")
 nvz = pygame.image.load("Assets/Image/Navezinha.png")
 rocket_img = pygame.image.load("Assets/Other/rocket.png").convert_alpha()
-obs_img1 = pygame.image.load('Assets/other/barreira1.png') 
-obs_img2 = pygame.image.load('Assets/other/barreira2.png') 
-obs_img3 = pygame.image.load('Assets/other/parede.png')
+obs_img1 = pygame.image.load('Assets/Other/barreira1.jpg') 
+obs_img2 = pygame.image.load('Assets/Other/barreira2.png')
+obs_img3 = pygame.image.load('Assets/Other/parede.png')
 gameover = pygame.image.load('Assets/Image/GameOver.jpg')
 tiles = pygame.image.load('Assets\Image\FullTiles.png')
+stop = pygame.image.load('Assets\Other\Stop.png').convert_alpha()
+
 
 BG = pygame.transform.scale(bg_img, (1000, 500))
 BG2 = pygame.transform.scale(bg_img2, (1000, 500))
@@ -34,8 +37,8 @@ BG7 = pygame.transform.scale(bg_img7, (1000, 500))
 BG8 = pygame.transform.scale(bg_img8, (1000, 500))
 BG9 = pygame.transform.scale(bg_img9, (1000, 500))
 MN = pygame.transform.scale(mn, (1000, 500))
-OBS1 = pygame.transform.scale(obs_img1, (100, 100))
-OBS2 = pygame.transform.scale(obs_img2, (100, 100))
+OBS1 = pygame.transform.scale(stop, (70, 110))
+OBS2 = pygame.transform.scale(obs_img2, (150, 150))
 OBS3 = pygame.transform.scale(obs_img3, (100, 100))
 GO = pygame.transform.scale(bg_img, (1000, 500))
 TL = pygame.transform.scale(tiles, (1000, 100))
@@ -51,12 +54,15 @@ AGAIXAR = [pygame.image.load(os.path.join("Assets/Player", "p1_down7.png")),
 
 DISP = pygame.image.load(os.path.join("Assets/Player", "p1_walk012.png"))
 
-ROCK = pygame.transform.scale(rocket_img, (100, 40))
+ROCK = pygame.transform.scale(rocket_img, (140, 70))
 
 NAVEZINHA = [pygame.image.load(os.path.join("Assets/Image", "Navezinha.png")), 
             pygame.image.load(os.path.join("Assets/Image", "Navezinha.png"))]
 HIDRA = pygame.image.load(os.path.join("Assets/Image", "Hidrante.jpg"))
 PLACA = pygame.image.load(os.path.join("Assets/Image", "Hidrante.jpg"))
+
+pygame.mixer.music.load("Assets/snd/DARUDE.mp3")
+pygame.mixer.music.set_volume(0.4)    
 
 class Alien:
     X_POS = 80
@@ -161,14 +167,14 @@ class Barreira(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
-        self.rect.y = 390
+        self.rect.y = 370
 
 
 class Cone(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
-        self.rect.y = 390
+        self.rect.y = 360
 
 
 class Naves(Obstaculo):
@@ -273,6 +279,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 3000 and points > 2000:
 
@@ -289,6 +296,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 4000 and points > 3000:
 
@@ -305,6 +313,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 5000 and points > 4000:
 
@@ -321,6 +330,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 6000 and points > 5000:
 
@@ -337,6 +347,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 7000 and points > 6000:
 
@@ -353,6 +364,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points <= 8000 and points > 7000:
 
@@ -369,6 +381,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
         elif points > 8000:
 
@@ -386,6 +399,7 @@ def main():
                 x_tiles = 0
 
             x_pos_bg -= velocidade
+            x_tiles -= velocidade
 
     # Update do que irá aparecer na tela
     while run:
@@ -555,6 +569,7 @@ def menu(perdeu):
                 run = False
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
+                pygame.mixer.music.play(loops=-1)
                 main()
 
 menu(perdeu=0)
