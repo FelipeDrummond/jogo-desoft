@@ -37,8 +37,8 @@ BG7 = pygame.transform.scale(bg_img7, (1000, 500))
 BG8 = pygame.transform.scale(bg_img8, (1000, 500))
 BG9 = pygame.transform.scale(bg_img9, (1000, 500))
 MN = pygame.transform.scale(mn, (1000, 500))
-OBS1 = pygame.transform.scale(stop, (70, 110))
-OBS2 = pygame.transform.scale(obs_img2, (140, 140))
+OBS1 = pygame.transform.scale(stop, (85, 125))
+OBS2 = pygame.transform.scale(obs_img2, (75, 95))
 OBS3 = pygame.transform.scale(obs_img3, (100, 100))
 GO = pygame.transform.scale(bg_img, (1000, 500))
 TL = pygame.transform.scale(tiles, (1000, 100))
@@ -167,14 +167,14 @@ class Barreira(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
-        self.rect.y = 370
+        self.rect.y = 360
 
 
 class Cone(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
-        self.rect.y = 360
+        self.rect.y = 375
 
 
 class Naves(Obstaculo):
