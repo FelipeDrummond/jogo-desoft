@@ -1,4 +1,4 @@
-# === JOGO SUBWAY SURFERS 2.0 ===
+# === JOGO DINO GOOGLE ===
 # ---- Importando bibliotecas necessárias
 import pygame
 import os
