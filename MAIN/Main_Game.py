@@ -410,7 +410,7 @@ def main():
 
         win.fill((255, 255, 255))
 
-        userInput = pygame.key.get_pressed()
+        usIn = pygame.key.get_pressed()
         
 
 
@@ -505,7 +505,7 @@ def main():
 
         player.muda(win)
 
-        player.att(userInput)
+        player.att(usIn)
 
         pontos()
 
