@@ -9,8 +9,7 @@ Além disso, o player precisa desviar de obstáculos característicos da cidade,
 
 Ao decorrer do jogo, sua pontuação será gravada, e indica quanto tempo você resistiu sem colidir!
 
-Mas atenção! Quanto maior a sua pontuação, mais rápido se torna o movimento do jogo, e você pode se deparar com cada vez mais obstáculos 
-vindo em sua direção!
+Mas atenção! Quanto maior a sua pontuação, mais rápido se torna o movimento do jogo, e você pode se deparar com cada vez mais obstáculos vindo em sua direção!
 
 Para combinar com o jogo e seu estilo frenético, você irá ouvir à musica "Darude - Sandstorm" durante seu a jogatina.
 
@@ -19,8 +18,7 @@ BOA CORRIDA!!!
 ===== REGRAS =====
  - Apenas as teclas são utilizadas (↑ e ↓).
  - Você não pode colidir com os obstáculos (Aeronaves, cones e placas de sinalização).
- - Sua pontuação é disponibilizada ao canto superior direito, e será gravada na memória do jogo e apresentada sua pontuação máxima no
- menu após o termino do game.
+ - Sua pontuação é disponibilizada ao canto superior direito, e será gravada na memória do jogo e apresentada sua pontuação máxima no menu após o termino do game.
 
 
 ===== MEMBROS =====
