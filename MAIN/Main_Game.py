@@ -516,6 +516,8 @@ def main():
 
 # Ultima função, que apresentará o "menu" principal do jogo, e apresenta algumas regras
 def menu(perdeu):
+     
+    pygame.mixer.music.pause()
 
     global points
 
