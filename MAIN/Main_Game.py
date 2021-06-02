@@ -17,11 +17,9 @@ bg_img7 = pygame.image.load("Assets/Image/City9.jpg")
 bg_img8 = pygame.image.load("Assets/Image/City.gif")
 bg_img9 = pygame.image.load("Assets/Image/City2_1.jpg")
 mn = pygame.image.load("Assets/Image/Nave.jpg")
-nvz = pygame.image.load("Assets/Image/Navezinha.png")
 rocket_img = pygame.image.load("Assets/Other/rocket.png").convert_alpha()
 obs_img1 = pygame.image.load('Assets/Other/barreira1.jpg') 
 obs_img2 = pygame.image.load('Assets/Other/barreira2.png').convert_alpha()
-obs_img3 = pygame.image.load('Assets/Other/parede.png')
 gameover = pygame.image.load('Assets/Image/GameOver.jpg')
 tiles = pygame.image.load('Assets\Image\FullTiles.png')
 stop = pygame.image.load('Assets\Other\Stop.png').convert_alpha()
@@ -39,10 +37,9 @@ BG9 = pygame.transform.scale(bg_img9, (1000, 500))
 MN = pygame.transform.scale(mn, (1000, 500))
 OBS1 = pygame.transform.scale(stop, (85, 125))
 OBS2 = pygame.transform.scale(obs_img2, (75, 95))
-OBS3 = pygame.transform.scale(obs_img3, (100, 100))
 GO = pygame.transform.scale(bg_img, (1000, 500))
 TL = pygame.transform.scale(tiles, (1000, 100))
-
+ROCK = pygame.transform.scale(rocket_img, (140, 70))
 
 CORRER = [pygame.image.load(os.path.join("Assets/Player", "p1_walk01.png")),
            pygame.image.load(os.path.join("Assets/Player", "p1_walk03.png"))]
@@ -53,13 +50,6 @@ AGAIXAR = [pygame.image.load(os.path.join("Assets/Player", "p1_down7.png")),
            pygame.image.load(os.path.join("Assets/Player", "p1_down8.png"))]
 
 DISP = pygame.image.load(os.path.join("Assets/Player", "p1_walk012.png"))
-
-ROCK = pygame.transform.scale(rocket_img, (140, 70))
-
-NAVEZINHA = [pygame.image.load(os.path.join("Assets/Image", "Navezinha.png")), 
-            pygame.image.load(os.path.join("Assets/Image", "Navezinha.png"))]
-HIDRA = pygame.image.load(os.path.join("Assets/Image", "Hidrante.jpg"))
-PLACA = pygame.image.load(os.path.join("Assets/Image", "Hidrante.jpg"))
 
 pygame.mixer.music.load("Assets/snd/DARUDE.mp3")
 pygame.mixer.music.set_volume(0.4)    
@@ -539,6 +529,7 @@ def menu(perdeu):
             text2 = font.render("Somente as setas serão usadas durante o jogo", True, (255, 233, 0))
             text3 = font.render("Não encoste em nenhum obstáculo!!!", True, (255, 0, 80))
 
+        # Apresenta novamente as dicas, porém, com a adição da pontuação
         elif perdeu > 0:
             
             text = font2.render("Aperte as setas para começar", True, (0, 255, 0))
