@@ -1,3 +1,6 @@
+# === INICIALIZAÇÃO ===
+# Importanto e iniciando bibliotecas 
+ 
 import pygame
 import os
 import random
@@ -5,7 +8,20 @@ import random
 pygame.init()
 pygame.mixer.init()
 
-win = pygame.display.set_mode((950, 500))
+# Definindo parâmetros
+ALT_TELA = 500
+LARG_TELA = 950
+FPS = 28
+ALT_NAVE = 70
+LARG_NAVE = 140
+ALT_STOP = 125
+LARG_STOP = 85
+ALT_CONE = 95
+LARG_CONE = 75 
+ALT_TILES = 100
+LARG_TILES = 1000
+
+win = pygame.display.set_mode((LARG_TELA, ALT_TELA))
 
 bg_img = pygame.image.load("Assets/Image/City5.jpg")
 bg_img2 = pygame.image.load("Assets/Image/City3.jpg")
@@ -24,21 +40,21 @@ tiles = pygame.image.load('Assets\Image\FullTiles.png')
 stop = pygame.image.load('Assets\Other\Stop.png').convert_alpha()
 
 
-BG = pygame.transform.scale(bg_img, (1000, 500))
-BG2 = pygame.transform.scale(bg_img2, (1000, 500))
-BG3 = pygame.transform.scale(bg_img3, (1000, 500))
-BG4 = pygame.transform.scale(bg_img4, (1000, 500))
-BG5 = pygame.transform.scale(bg_img5, (1000, 500))
-BG6 = pygame.transform.scale(bg_img6, (1000, 500))
-BG7 = pygame.transform.scale(bg_img7, (1000, 500))
-BG8 = pygame.transform.scale(bg_img8, (1000, 500))
-BG9 = pygame.transform.scale(bg_img9, (1000, 500))
-MN = pygame.transform.scale(mn, (1000, 500))
-OBS1 = pygame.transform.scale(stop, (85, 125))
-OBS2 = pygame.transform.scale(obs_img2, (75, 95))
-GO = pygame.transform.scale(gameover, (1000, 500))
-TL = pygame.transform.scale(tiles, (1000, 100))
-ROCK = pygame.transform.scale(rocket_img, (140, 70))
+BG = pygame.transform.scale(bg_img, (LARG_TELA, ALT_TELA))
+BG2 = pygame.transform.scale(bg_img2, (LARG_TELA, ALT_TELA))
+BG3 = pygame.transform.scale(bg_img3, (LARG_TELA, ALT_TELA))
+BG4 = pygame.transform.scale(bg_img4, (LARG_TELA, ALT_TELA))
+BG5 = pygame.transform.scale(bg_img5, (LARG_TELA, ALT_TELA))
+BG6 = pygame.transform.scale(bg_img6, (LARG_TELA, ALT_TELA))
+BG7 = pygame.transform.scale(bg_img7, (LARG_TELA, ALT_TELA))
+BG8 = pygame.transform.scale(bg_img8, (LARG_TELA, ALT_TELA))
+BG9 = pygame.transform.scale(bg_img9, (LARG_TELA, ALT_TELA))
+MN = pygame.transform.scale(mn, (LARG_TELA, ALT_TELA))
+OBS1 = pygame.transform.scale(stop, (LARG_STOP, ALT_STOP))
+OBS2 = pygame.transform.scale(obs_img2, (LARG_CONE, ALT_CONE))
+GO = pygame.transform.scale(gameover, (LARG_TELA, ALT_TELA))
+TL = pygame.transform.scale(tiles, (LARG_TILES, ALT_TILES))
+ROCK = pygame.transform.scale(rocket_img, (LARG_NAVE, ALT_NAVE))
 
 CORRER = [pygame.image.load(os.path.join("Assets/Player", "p1_walk01.png")),
            pygame.image.load(os.path.join("Assets/Player", "p1_walk03.png"))]
@@ -498,7 +514,7 @@ def main():
 
         pontos()
 
-        clock.tick(30)
+        clock.tick(FPS)
         
         pygame.display.update()
 
