@@ -4,7 +4,7 @@ import random
 pygame.init()
 
 
-win = pygame.display.set_mode((1000, 500))
+win = pygame.display.set_mode((950, 500))
 
 bg_img = pygame.image.load("Assets/Image/City5.jpg")
 bg_img2 = pygame.image.load("Assets/Image/City3.jpg")
