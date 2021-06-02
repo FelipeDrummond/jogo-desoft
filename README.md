@@ -1,6 +1,7 @@
 JOGO - DESOFT
 
 ===== EXPLICANDO =====
+
 O jogo "x" funciona num padrão de "endless run", onde o personagem (alienígena) passa por transições de background, com um aumento gradual da velocidade, consequentemente impactando na dificuldade do game.
 
 O contexto é de uma cidade futurística, habitada por aliens. Dessa forma, todos os cenários são inseridos no contexto urbano futurista.
