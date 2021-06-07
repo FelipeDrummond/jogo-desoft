@@ -508,12 +508,9 @@ def main():
             obstacle.draw(win)
             obstacle.update()
             if player.alien_rect.colliderect(obstacle.rect):
-<<<<<<< HEAD
-                pygame.time.delay(1000)
-                pygame.mixer.music.pause()
-=======
                 pygame.time.delay(500)
->>>>>>> a58db9b9e92eedb90dfc129f841ff76976088f15
+                pygame.mixer.music.pause()
+                pygame.time.delay(300)
                 GameOver()
 
 
@@ -528,20 +525,14 @@ def main():
         pygame.display.update()
 
 def GameOver():
-<<<<<<< HEAD
-
     Gameover_snd.play()
 
-    perdeu = 0
-=======
     perdeu = 1
->>>>>>> a58db9b9e92eedb90dfc129f841ff76976088f15
     
-    win.fill((255, 255, 255))
     win.blit(GO, (0, 0))
 
     pygame.display.update()
-    pygame.time.delay(4500)
+    pygame.time.delay(4000)
 
     menu(perdeu)
 
@@ -558,7 +549,6 @@ def menu(perdeu):
         
         # Faz o background do menu
 
-        win.fill((255, 255, 255))
         win.blit(MN, (0, 0))
 
         font = pygame.font.SysFont(None, 35)
