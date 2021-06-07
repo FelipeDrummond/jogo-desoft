@@ -5,6 +5,8 @@ import pygame
 import os
 import random
 
+from pygame.constants import K_s
+
 pygame.init()
 pygame.mixer.init()
 
@@ -113,11 +115,11 @@ class Alien:
         if self.passo_index >= 10:
             self.passo_index = 0
 
-        if usIn[pygame.K_UP] and not self.alien_pula:
+        if (usIn[pygame.K_UP] or usIn[pygame.K_SPACE] or usIn[pygame.K_w]) and not self.alien_pula:
             self.alien_agaixa = False
             self.alien_corre = False
             self.alien_pula = True
-        elif usIn[pygame.K_DOWN] and not self.alien_pula:
+        elif (usIn[pygame.K_DOWN] or usIn[pygame.K_s]) and not self.alien_pula:
             self.alien_agaixa = True
             self.alien_corre = False
             self.alien_pula = False
@@ -558,15 +560,13 @@ def menu(perdeu):
         # Apresenta dicas e como iniciar o jogo
         if perdeu == 0:
             text = font2.render("Aperte as setas para começar", 50, (0, 255, 0))
-            text2 = font.render("Somente as setas serão usadas durante o jogo", True, (255, 233, 0))
-            text3 = font.render("Não encoste em nenhum obstáculo!!!", True, (255, 0, 80))
+            text2 = font2.render("Não encoste em nenhum obstáculo!!!", True, (255, 0, 10))
 
         # Apresenta novamente as dicas, porém, com a adição da pontuação
         elif perdeu > 0:
             
             text = font2.render("Aperte as setas para começar", True, (0, 255, 0))
-            text2 = font.render("Somente as setas serão usadas durante o jogo", True, (255, 233, 0))
-            text3 = font.render("Não encoste em nenhum obstáculo!!!", True, (255, 0, 80))
+            text2 = font2.render("Não encoste em nenhum obstáculo!!!", True, (255, 0, 10))
             score = font.render("Sua Pontuação: " + str(points), True, (0, 0, 0))
             scoreRect = score.get_rect()
             scoreRect.center = (490, 370)
@@ -578,12 +578,8 @@ def menu(perdeu):
         textRect2 = text2.get_rect()
         textRect2.center = (490, 435)
 
-        textRect3 = text3.get_rect()
-        textRect3.center = (490, 470)
-
         win.blit(text, textRect)
         win.blit(text2, textRect2)
-        win.blit(text3, textRect3)
         win.blit(DISP, (440, 200))
 
         pygame.display.update()
