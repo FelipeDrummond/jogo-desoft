@@ -2,10 +2,11 @@ import pygame
 import os
 
 # Estabelece a pasta que contém as figuras e sons
-IMG_DIR = path.join(path.dirname(__file__), 'Assets', 'Image')
-PLAYER_DIR = path.join(path.dirname(__file__), 'Assets', 'Player')
-OTHER_DIR = path.join(path.dirname(__file__), 'Assets', 'Other')
-SND_DIR = path.join(path.dirname(__file__), 'Assets', 'snd')
+IMG_DIR = os.path.join('Assets', 'Image')
+#IMG_DIR = os.path.join(path.dirname(__file__), 'Assets', 'Image')
+PLAYER_DIR = os.path.join('Assets', 'Player')
+OTHER_DIR = os.path.join('Assets', 'Other')
+SND_DIR = os.path.join('Assets', 'snd')
 
 # Parâmetros Universais do jogo
 ALT_TELA = 500 # Altura da tela

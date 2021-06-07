@@ -37,7 +37,6 @@ bg_img8 = pygame.image.load("Assets/Image/City.gif")
 bg_img9 = pygame.image.load("Assets/Image/City2_1.jpg")
 mn = pygame.image.load("Assets/Image/Nave.jpg")
 rocket_img = pygame.image.load("Assets/Other/rocket.png").convert_alpha()
-obs_img1 = pygame.image.load('Assets/Other/barreira1.jpg') 
 obs_img2 = pygame.image.load('Assets/Other/barreira2.png').convert_alpha()
 gameover = pygame.image.load('Assets/Image/GameOver.jpg')
 tiles = pygame.image.load('Assets\Image\FullTiles.png')
@@ -555,13 +554,13 @@ def menu(perdeu):
  
         # Apresenta dicas e como iniciar o jogo
         if perdeu == 0:
-            text = font2.render("Aperte as setas para começar", 50, (0, 255, 0))
+            text = font2.render("Aperte qualquer tecla para começar", 50, (0, 255, 0))
             text2 = font2.render("Não encoste em nenhum obstáculo!!!", True, (255, 0, 10))
 
         # Apresenta novamente as dicas, porém, com a adição da pontuação
         elif perdeu > 0:
             
-            text = font2.render("Aperte as setas para começar", True, (0, 255, 0))
+            text = font2.render("Aperte qualquer tecla para começar", True, (0, 255, 0))
             text2 = font2.render("Não encoste em nenhum obstáculo!!!", True, (255, 0, 10))
             score = font.render("Sua Pontuação: " + str(points), True, (0, 0, 0))
             scoreRect = score.get_rect()
