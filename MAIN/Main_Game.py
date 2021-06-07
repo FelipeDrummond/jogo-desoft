@@ -508,9 +508,11 @@ def main():
             obstacle.draw(win)
             obstacle.update()
             if player.alien_rect.colliderect(obstacle.rect):
+
                 pygame.time.delay(500)
                 pygame.mixer.music.pause()
                 pygame.time.delay(300)
+                
                 GameOver()
 
 
@@ -525,9 +527,8 @@ def main():
         pygame.display.update()
 
 def GameOver():
-    Gameover_snd.play()
-
     perdeu = 1
+    Gameover_snd.play()
     
     win.blit(GO, (0, 0))
 
