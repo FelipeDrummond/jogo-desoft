@@ -6,7 +6,7 @@ O jogo "x" funciona num padrão de "endless run", onde o personagem (alienígena
 
 O contexto é de uma cidade futurística, habitada por aliens. Dessa forma, todos os cenários são inseridos no contexto urbano futurista.
 
-Além disso, o player precisa desviar de obstáculos característicos da cidade, como placas de trânsito, cones e até mesmo pequenas aeronaves que transitam pelas ruas, o que é possível de se fazer ao pular (apertando a ↑) ou agaixar (apertando a ↓). 
+Além disso, o player precisa desviar de obstáculos característicos da cidade, como placas de trânsito, cones e até mesmo pequenas aeronaves que transitam pelas ruas, o que é possível de se fazer ao pular (apertando '↑', 'W' ou 'SPACE') ou agaixar (apertando '↓' ou 's'). 
 
 Ao decorrer do jogo, sua pontuação será gravada, e indica quanto tempo você resistiu sem colidir!
 
@@ -17,7 +17,7 @@ Para combinar com o jogo e seu estilo frenético, você irá ouvir à musica "Da
 BOA CORRIDA!!!
 
 ===== REGRAS =====
- - Apenas as teclas são utilizadas (↑ e ↓).
+ - Apenas as teclas '↑', 'w', 'SPACE', '↓' e 's' podem ser utilizadas.
  - Você não pode colidir com os obstáculos (Aeronaves, cones e placas de sinalização).
  - Sua pontuação é disponibilizada ao canto superior direito, e será gravada na memória do jogo e apresentada sua pontuação máxima no menu após o termino do game.
 
