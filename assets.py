@@ -41,6 +41,14 @@ BG9 = 'bg_img9'
 TILES = 'tl'
 GAME_OVER = 'game_over'
 NAVE = 'nave'
+ROCKET = 'rocket'
+BARREIRA2 = 'barreira2'
+STOP = 'stop'
+CORRER = 'correr'
+PULAR = 'pular'
+AGAIXAR = 'agaixar'
+DISP = 'disp'
+
 
 def load_assets():
     assets = {}
@@ -71,11 +79,30 @@ def load_assets():
     assets[BG9] = pygame.image.load("Image/City4.jpg")
     assets[BG9] = pygame.transform.scale(BG9, (LA_BG, ALT_TELA))
 
-    assets[TILES] = pygame.image.load("Image/FullTiles.jpg")
-    assets[TILES] = pygame.transform.scale(BG9, (LARG_TILES, ALT_TILES))
+    assets[TILES] = pygame.image.load("Image/FullTiles.png")
+    assets[TILES] = pygame.transform.scale(TILES, (LARG_TILES, ALT_TILES))
 
     assets[GAME_OVER] = pygame.image.load("Image/GameOver.jpg")
-    assets[GAME_OVER] = pygame.transform.scale(BG9, (LARG_TELA, ALT_TELA))
+    assets[GAME_OVER] = pygame.transform.scale(GAME_OVER, (LARG_TELA, ALT_TELA))
+
+    assets[ROCKET] = pygame.image.load("Image/rocket.ong").convert_alpha()
+    assets[ROCKET] = pygame.transform.scale(ROCKET, (LARG_NAVE, ALT_NAVE))
+    
+    assets[BARREIRA2] = pygame.image.load("Image/barreira2.png").convert_alpha()
+    assets[BARREIRA2] = pygame.transform.scale(BARREIRA2, (LARG_CONE, ALT_CONE))
+
+    assets[STOP] = pygame.image.load("Image/barreira2.png").convert_alpha()
+    assets[STOP] = pygame.transform.scale(STOP, (LARG_STOP, ALT_STOP))
+
+    assets[CORRER] = [pygame.image.load(os.path.join("Assets/Player", "p1_walk01.png")),
+           pygame.image.load(os.path.join("Assets/Player", "p1_walk03.png"))]
+    
+    assets[PULAR] = pygame.image.load(os.path.join("Assets/Player", "p1_jump.png"))
+
+    assets[AGAIXAR] = [pygame.image.load(os.path.join("Assets/Player", "p1_down7.png")), 
+           pygame.image.load(os.path.join("Assets/Player", "p1_down8.png"))]
+
+    assets[DISP] =  pygame.image.load(os.path.join("Assets/Player", "p1_walk012.png"))
 
 
 
