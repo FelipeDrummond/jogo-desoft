@@ -59,7 +59,6 @@ OBS2 = pygame.transform.scale(obs_img2, (LARG_CONE, ALT_CONE))
 GO = pygame.transform.scale(gameover, (LARG_TELA, ALT_TELA))
 TL = pygame.transform.scale(tiles, (LARG_TILES, ALT_TILES))
 ROCK = pygame.transform.scale(rocket_img, (LARG_NAVE, ALT_NAVE))
-#>>>>>>> e81d8ee9e76f0db6f512253cb68394f54fab880d
 
 CORRER = [pygame.image.load(os.path.join("Assets/Player", "p1_walk01.png")),
            pygame.image.load(os.path.join("Assets/Player", "p1_walk03.png"))]
