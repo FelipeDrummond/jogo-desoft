@@ -72,6 +72,7 @@ AGAIXAR = [pygame.image.load(os.path.join("Assets/Player", "p1_down7.png")),
 DISP = pygame.image.load(os.path.join("Assets/Player", "p1_walk012.png"))
 
 pygame.mixer.music.load("Assets/snd/DARUDE.mp3")
+Gameover_snd = pygame.mixer.Sound("Assets/snd/gameover.mp3")
 pygame.mixer.music.set_volume(0.4)    
 
 class Alien:
@@ -508,6 +509,7 @@ def main():
             obstacle.update()
             if player.alien_rect.colliderect(obstacle.rect):
                 pygame.time.delay(1000)
+                pygame.mixer.music.pause()
                 GameOver()
 
 
@@ -522,13 +524,16 @@ def main():
         pygame.display.update()
 
 def GameOver():
+
+    Gameover_snd.play()
+
     perdeu = 0
     
     win.fill((255, 255, 255))
     win.blit(GO, (0, 0))
 
     pygame.display.update()
-    pygame.time.delay(3000)
+    pygame.time.delay(4500)
 
     perdeu += 1
     menu(perdeu)
