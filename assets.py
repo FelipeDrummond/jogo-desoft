@@ -1,5 +1,6 @@
 import pygame
 import os
+from config import ALT_TELA, LARG_TELA, LA_BG, FPS, ALT_NAVE, LARG_NAVE, ALT_STOP, LARG_STOP, ALT_CONE, LARG_CONE, ALT_TILES, LARG_TILES
 
 bg_img = pygame.image.load("Image/City5.jpg")
 bg = pygame.transform.scale(bg_img, (1000, 500))
