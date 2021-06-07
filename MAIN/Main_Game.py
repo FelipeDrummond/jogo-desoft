@@ -43,9 +43,6 @@ gameover = pygame.image.load('Assets/Image/GameOver.jpg')
 tiles = pygame.image.load('Assets\Image\FullTiles.png')
 stop = pygame.image.load('Assets\Other\Stop.png').convert_alpha()
 
-
-#<<<<<<< HEAD
-#=======
 BG = pygame.transform.scale(bg_img, (LA_BG, ALT_TELA))
 BG2 = pygame.transform.scale(bg_img2, (LA_BG, ALT_TELA))
 BG3 = pygame.transform.scale(bg_img3, (LA_BG, ALT_TELA))

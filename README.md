@@ -1,8 +1,10 @@
-JOGO - DESOFT
+JOGO ALIEN RUN - PyGame - DESOFT
+
+Projeto Final
 
 ===== EXPLICANDO =====
 
-O jogo "x" funciona num padrão de "endless run", onde o personagem (alienígena) passa por transições de background, com um aumento gradual da velocidade, consequentemente impactando na dificuldade do game.
+O jogo Alien Run funciona num padrão de "endless run", onde o personagem (alienígena) passa por transições de background, com um aumento gradual da velocidade, consequentemente impactando na dificuldade do game.
 
 O contexto é de uma cidade futurística, habitada por aliens. Dessa forma, todos os cenários são inseridos no contexto urbano futurista.
 
