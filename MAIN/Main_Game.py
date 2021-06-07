@@ -79,7 +79,7 @@ class Alien:
     X_POS = 80
     Y_POS = 375
     Y_POS_AG = 397
-    vel_pulo = 8.5
+    vel_pulo = 10
 
     def __init__(self):
 
@@ -146,8 +146,8 @@ class Alien:
     def pula(self):
         self.image = self.pula_img
         if self.alien_pula:
-            self.alien_rect.y -= self.pulo_vel * 6
-            self.pulo_vel -= 0.85
+            self.alien_rect.y -= self.pulo_vel * 5
+            self.pulo_vel -= 1
         if self.pulo_vel < - self.vel_pulo:
             self.alien_pula = False
             self.pulo_vel = self.vel_pulo
@@ -508,8 +508,12 @@ def main():
             obstacle.draw(win)
             obstacle.update()
             if player.alien_rect.colliderect(obstacle.rect):
+<<<<<<< HEAD
                 pygame.time.delay(1000)
                 pygame.mixer.music.pause()
+=======
+                pygame.time.delay(500)
+>>>>>>> a58db9b9e92eedb90dfc129f841ff76976088f15
                 GameOver()
 
 
@@ -524,10 +528,14 @@ def main():
         pygame.display.update()
 
 def GameOver():
+<<<<<<< HEAD
 
     Gameover_snd.play()
 
     perdeu = 0
+=======
+    perdeu = 1
+>>>>>>> a58db9b9e92eedb90dfc129f841ff76976088f15
     
     win.fill((255, 255, 255))
     win.blit(GO, (0, 0))
@@ -535,7 +543,6 @@ def GameOver():
     pygame.display.update()
     pygame.time.delay(4500)
 
-    perdeu += 1
     menu(perdeu)
 
 # Ultima função, que apresentará o "menu" principal do jogo, e apresenta algumas regras
