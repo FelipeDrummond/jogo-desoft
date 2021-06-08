@@ -1,6 +1,6 @@
 # === INICIALIZAÇÃO ===
-# Importanto e iniciando bibliotecas 
- 
+
+# Importanto e iniciando bibliotecas  
 import pygame
 import os
 import random
@@ -24,8 +24,10 @@ LARG_CONE = 75
 ALT_TILES = 100
 LARG_TILES = 1000
 
+# Definindo tamanho da tela 
 win = pygame.display.set_mode((LARG_TELA, ALT_TELA))
 
+# Iniciando assets
 bg_img = pygame.image.load("Assets/Image/City5.jpg")
 bg_img2 = pygame.image.load("Assets/Image/City3.jpg")
 bg_img3 = pygame.image.load("Assets/Image/City4.jpg")
@@ -42,6 +44,7 @@ gameover = pygame.image.load('Assets/Image/GameOver.jpg')
 tiles = pygame.image.load('Assets\Image\FullTiles.png')
 stop = pygame.image.load('Assets\Other\Stop.png').convert_alpha()
 
+# Transformando assets para a escala correta
 BG = pygame.transform.scale(bg_img, (LA_BG, ALT_TELA))
 BG2 = pygame.transform.scale(bg_img2, (LA_BG, ALT_TELA))
 BG3 = pygame.transform.scale(bg_img3, (LA_BG, ALT_TELA))
@@ -68,10 +71,12 @@ AGAIXAR = [pygame.image.load(os.path.join("Assets/Player", "p1_down7.png")),
 
 DISP = pygame.image.load(os.path.join("Assets/Player", "p1_walk012.png"))
 
+# Carregando arquivos de som
 pygame.mixer.music.load("Assets/snd/DARUDE.mp3")
 Gameover_snd = pygame.mixer.Sound("Assets/snd/gameover.mp3")
 pygame.mixer.music.set_volume(0.4)    
 
+# Iniciando estruturas de dados (classes)
 class Alien:
     X_POS = 80
     Y_POS = 375
@@ -212,10 +217,11 @@ class Zero(Obstaculo):
         self.index += 1
 
 
-# Função principal do jojo
+# Função com o loop principal do jogo
 def main():
     global velocidade, x_pos_bg, y_pos_bg, points, obstacles, x_tiles
     run = True
+    # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
     player = Alien()    
     velocidade = 20
@@ -411,8 +417,11 @@ def main():
     # Update do que irá aparecer na tela
     while run:
 
+        # Trata eventos
         for event in pygame.event.get():
+            # Verifica consequência
             if event.type == pygame.QUIT:
+                pygame.mixer.music.pause()
                 run = False
 
         win.fill((255, 255, 255))
@@ -423,6 +432,7 @@ def main():
 
         background()
 
+        # Faz com que a  probabilidade de aparecimento de obstáculos mude conforme o jogo avança
         if len(obstacles) == 0:
             if points < 1000:
                 z = random.randint(0, 3)
@@ -500,7 +510,7 @@ def main():
                 elif z7 == 5 or z7 == 6:
                     obstacles.append(Zero(ROCK))
 
-
+        # Analisa possíveis colisões (GAME OVER)
         for obstacle in obstacles:
             obstacle.draw(win)
             obstacle.update()
@@ -510,9 +520,10 @@ def main():
                 pygame.mixer.music.pause()
                 pygame.time.delay(300)
                 
+                # Caso ocorra uma colisão, invoca a função Game Over
                 GameOver()
 
-
+        # Caso não ocorram colisões, atualiza os elementos do jogo
         player.muda(win)
 
         player.att(usIn)
@@ -523,8 +534,10 @@ def main():
         
         pygame.display.update()
 
+# Função que mostra a tela de Game Over
 def GameOver():
     perdeu = 1
+    # Música de game over
     Gameover_snd.play()
     
     win.blit(GO, (0, 0))
@@ -532,11 +545,12 @@ def GameOver():
     pygame.display.update()
     pygame.time.delay(4000)
 
+    # Já retorna automaticamente para o menu principal
     menu(perdeu)
 
 # Ultima função, que apresentará o "menu" principal do jogo, e apresenta algumas regras
 def menu(perdeu):
-     
+    # Pausa música do jogo
     pygame.mixer.music.pause()
 
     global points
