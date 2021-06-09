@@ -31,7 +31,7 @@ BOA CORRIDA!!!
 
 VÍDEO DO JOGO:
 
-![Game](https://github.com/FelipeDrummond/jogo-desoft.git/Assets/Game_Img/Game.png)
+![Game](https://user-images.githubusercontent.com/81171471/121371159-b7ca9280-c913-11eb-96a4-b0048b63c641.png)
 
 Link:
     https://vimeo.com/560879948
