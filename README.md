@@ -8,7 +8,7 @@ O jogo Alien Run funciona num padrão de "endless run", onde o personagem (alien
 
 O contexto é de uma cidade futurística, habitada por aliens. Dessa forma, todos os cenários são inseridos no contexto urbano futurista.
 
-Além disso, o player precisa desviar de obstáculos característicos da cidade, como placas de trânsito, cones e até mesmo pequenas aeronaves que transitam pelas ruas, o que é possível de se fazer ao pular (apertando '↑', 'W' ou 'SPACE') ou agaixar (apertando '↓' ou 's'). 
+Além disso, o player precisa desviar de obstáculos característicos da cidade, como placas de trânsito, cones e até mesmo pequenas aeronaves que transitam pelas ruas, o que é possível de se fazer ao pular (apertando '↑', 'w' ou 'SPACE') ou agaixar (apertando '↓' ou 's'). 
 
 Ao decorrer do jogo, sua pontuação será gravada, e indica quanto tempo você resistiu sem colidir!
 
