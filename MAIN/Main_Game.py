@@ -158,7 +158,7 @@ class Alien:
     def muda(self, win):
         win.blit(self.image, (self.alien_rect.x, self.alien_rect.y))
 
-
+# Classe dos obstáculos
 class Obstaculo:
 
     def __init__(self, image, type):
@@ -175,26 +175,26 @@ class Obstaculo:
     def draw(self, win):
         win.blit(self.image, self.rect)
 
-
+# Placa de stop
 class Barreira(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
         self.rect.y = 360
 
-
+# Cone de trânsito
 class Cone(Obstaculo):
     def __init__(self, image):
         self.type = random.randint(0, 2)
         super().__init__(image, self.type)
         self.rect.y = 375
 
-
+# Foguete
 class Naves(Obstaculo):
     def __init__(self, image):
         self.type = 0
         super().__init__(image, self.type)
-        self.rect.y = random.randint(250, 370)
+        self.rect.y = random.randint(250, 330)
         self.index = 0
 
     def draw(self, win):
@@ -203,6 +203,7 @@ class Naves(Obstaculo):
         win.blit(self.image, self.rect)
         self.index += 1
 
+# Não aparecer obstáculo
 class Zero(Obstaculo):
     def __init__(self, image):
         self.type = 0
