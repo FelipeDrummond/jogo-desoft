@@ -29,6 +29,8 @@ BOA CORRIDA!!!
  - Felipe Drummond
  - Thomas Chabro
 
+
+
 VÍDEO DO JOGO:
 
 ![Game](https://user-images.githubusercontent.com/81171471/121371159-b7ca9280-c913-11eb-96a4-b0048b63c641.png)
